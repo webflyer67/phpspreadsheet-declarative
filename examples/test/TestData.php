@@ -51,7 +51,7 @@ class TestData
             [
                 'height' => 100,
                 'img1' => [
-                    'Path' => $_SERVER['DOCUMENT_ROOT'] . '/examples/images/1.jpg',
+                    'Path' => 'https://dummyimage.com/300x200/1291bb/fff.jpg&text=phpspreadsheet',
                     'Name' => 'Дерево',
                     'Description' => 'Дерево',
                     'OffsetX' => 0,
@@ -65,7 +65,7 @@ class TestData
                     //  'height' => 100,
                 ],
                 'img2' => [
-                    'Path' => $_SERVER['DOCUMENT_ROOT'] . '/examples/images/2.jpg',
+                    'Path' => 'https://dummyimage.com/300x200/1291bb/fff.jpg&text=decrarative',
                     'Name' => 'Лес',
                     'Description' => 'Лес',
                     'OffsetX' => 0,
@@ -76,7 +76,7 @@ class TestData
                     'Shadow' => ['Visible' => true, 'Direction' => 90,],
                 ],
                 'img3' => [
-                    'Path' => $_SERVER['DOCUMENT_ROOT'] . '/examples/images/5.jpg',
+                    'Path' => 'https://dummyimage.com/300x200/1291bb/fff.jpg&text=phpspreadsheet',
                     'Name' => 'Олень',
                     'Description' => 'Олень',
                     'OffsetX' => 20,

@@ -38,16 +38,3 @@ function toLog($value, $die = 0, $toHTML = 1) //todo kill
         die();
     }
 }
-
-
-/**
- * Исправление проблем с совместимостью с Mpdf, перед генерацией документа вносим несклько изменений:
- * 1. В инлийн стилях убираем для границ "!important", иначе они не отрисовываются
- * 2. Для всех ссылок наследуем стили: цвет и подчеркивание, они применяются к родителю и по дефолту не наследуются
- */
-/*$html = $this->generateHTMLHeader(false) .
-    $this->generateSheetData() .
-    $this->generateHTMLFooter();
-$html = preg_replace('/(border[^<>;"\']+) !important/uis', '$1', $html);
-$html = preg_replace('/<a /uis', '<a style="color: inherit;text-decoration: inherit;"', $html);
-$pdf->WriteHTML($html);*/

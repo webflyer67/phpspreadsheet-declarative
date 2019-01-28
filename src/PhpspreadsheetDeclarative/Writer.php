@@ -17,11 +17,10 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Writer\Html;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf;
-use PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf\Tcpdf;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
+use webflyer67\PhpspreadsheetDeclarative\Fix\Mpdf;
 
 class  Writer
 {
@@ -45,7 +44,6 @@ class  Writer
 
     /**
      * Инициализирует и возвращает экземпляр данного класса
-     *
      * @return $this
      */
     public static function getWriter()
@@ -57,9 +55,7 @@ class  Writer
 
     /**
      * Устанавливает метаданные документа
-     *
      * @param array $meta Метаданные документа: автор, название, описание и т.д.
-     *
      * @return $this
      */
     public function setMeta($meta)
@@ -76,10 +72,8 @@ class  Writer
 
     /**
      * Добавляет массив из которого впоследствии будет сформировано тело таблицы
-     *
      * @param string $name Имя массива
      * @param array $array Массив из элементо ключ-значение
-     *
      * @return $this
      */
     public function addData($name, $array)
@@ -90,9 +84,7 @@ class  Writer
 
     /**
      * Обертка над addData, чтоб можно было одним массивом добавить несколько массивов данных
-     *
      * @param array $array Массив массивов из элементов ключ-значение
-     *
      * @return $this
      */
     public function addDatas($array)
@@ -105,10 +97,8 @@ class  Writer
 
     /**
      * Добавляет массива со стилями из которого впоследствии будут браться стили
-     *
      * @param string $name Имя массива
      * @param array $array Массив из элементов в формате, котарый понимается методом applyFromArray()
-     *
      * @return $this
      */
     public function addStyle($name, $array)
@@ -134,12 +124,9 @@ class  Writer
 
     /**
      * Добавляет лист к документу. В переданном шаблоне установленв связи со стилями и данными, по этому шаблону строится лист
-     *
      * @param array $template Шаблон генерируемого документа
      * @param array $setup Настройки листа: размер, ориентация
-     *
      * @return $this
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     public function addSheet($template, $setup = [])
@@ -183,18 +170,15 @@ class  Writer
         return $this->document;
     }
 
-
     /**
      * Сохраняет файл на диск
-     *
      * @param string $pFilename Полное имя файла
      * @param string $pdfType Выбрать какую библиотеку использовать для сохранения в pdf: 'm'|'dom'|'tc'
-     *
      * @return $this
-     *
+     * @throws Exception
+     * @throws \Mpdf\MpdfException
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
-     * @throws Exception
      */
     public function writeDocument($pFilename, $pdfType = 'm')
     {
@@ -246,13 +230,12 @@ class  Writer
 
     /**
      * Отсылает файл в браузер
-     *
      * @param string $filename - имя файла
      * @param string $pdfType Выбрать какую библиотеку использовать для сохранения в pdf: 'm'|'dom'|'tc'
-     *
+     * @throws Exception
+     * @throws \Mpdf\MpdfException
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
-     * @throws Exception
      */
     public function sendDocument($filename, $pdfType = 'm')
     {
@@ -307,9 +290,7 @@ class  Writer
 
     /**
      * Устанавливает настройки листа, размер бумаги, ориентацию
-     *
      * @param array $setup Настройки
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function setSetup($setup)
@@ -329,10 +310,8 @@ class  Writer
 
     /**
      * Добавляет таблицу на лист
-     *
      * @param array $template Шаблон листа
      * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Лист - объект Worksheet
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function addTable($template, $sheet)
@@ -385,13 +364,11 @@ class  Writer
 
     /**
      * Добавляет заголовок таблицы
-     *
      * @param array $template Шаблон листа
      * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Лист - объект Worksheet
      * @param int $headHeight Высота заголовка
      * @param int $startRow Начальная строка
      * @param int $startColumn Начальный столбец
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function addTableHead($template, $sheet, $headHeight, $startRow, $startColumn)
@@ -465,13 +442,11 @@ class  Writer
 
     /**
      * Добавляет тело таблицы
-     *
      * @param array $template Шаблон листа
      * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Лист - объект Worksheet
      * @param int $bodyHeight Высота заголовка
      * @param int $startRow Начальная строка
      * @param int $startColumn Начальный столбец
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function addTableBody($template, $sheet, $bodyHeight, $startRow, $startColumn)
@@ -536,6 +511,7 @@ class  Writer
 
                                 $drawing = new Drawing();
                                 $props = $dataRow[$colTemplate['body']['bindColumnImage']];
+                                $hasDrawing = false;
                                 foreach ($props as $prop => $val) {
                                     $method = 'set' . $prop;
                                     if ($prop == 'Hyperlink') {
@@ -544,6 +520,14 @@ class  Writer
                                             $tooltip = $props['Description'];
                                         }
                                         $val = new Hyperlink($val, $tooltip);
+                                    }
+                                    if ($prop == 'Path') {
+                                        $val = $this->getTmpImage($val);
+                                        if ($val != '') {
+                                            $hasDrawing = true;
+                                        } else {
+                                            continue;
+                                        }
                                     }
                                     if ($prop != 'Shadow') {
                                         $drawing->$method($val);
@@ -557,8 +541,10 @@ class  Writer
                                     }
 
                                 }
-                                $drawing->setCoordinates($cell);
-                                $drawing->setWorksheet($sheet);
+                                if ($hasDrawing) {
+                                    $drawing->setCoordinates($cell);
+                                    $drawing->setWorksheet($sheet);
+                                }
                             }
                         }
                         // Привязка ссылки, если есть
@@ -601,9 +587,7 @@ class  Writer
 
     /**
      * Объединяет ячейки, если некоторые обасти пересекаются, то не объединяет
-     *
      * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Лист - объект Worksheet
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function mergeCellsXLS($sheet)
@@ -641,11 +625,9 @@ class  Writer
 
     /**
      * Применяет стили к ячейкам
-     *
      * @param string $cells Ячейка или диапазон ячеек для применения стилей
      * @param array|string $styleNames Имена|имя стилей
      * @param \PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet Лист - объект Worksheet
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function setStyles($cells, $styleNames, $sheet)
@@ -664,9 +646,7 @@ class  Writer
 
     /**
      * Преобразует разделители тысяч для pdf/html и обратно
-     *
      * @param string $type Как преобразовывать 'pdf'|'xls'
-     *
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
     private function correctThousands($type)
@@ -705,5 +685,52 @@ class  Writer
 
             }
         }
+    }
+
+    /**
+     * Возвращает полный путь к картинке на диске.
+     * Если исползована внешняя ссылка, то файл предваритьльно скачивается, предварительно проверяя в кеше
+     * @param string $pValue
+     * @return string
+     */
+    private function getTmpImage($pValue)
+    {
+        // передан файл на диске
+        if (file_exists($pValue)) {
+            return $pValue;
+        }
+        // передаа ссылка, поверяем в кэше, если файл загружен - отдаём его
+        $path = sys_get_temp_dir() . '/spr_decl_' . md5($pValue);
+        $files = glob($path . '*');
+        if (!empty($files[0])) {
+            return $files[0];
+        }
+        if (@fopen($pValue, "r")) {
+            $img_type = getimagesize($pValue);
+            switch ($img_type['mime']) {
+                case 'image/gif':
+                    $ext = "gif";
+                    break;
+                case 'image/png':
+                    $ext = "png";
+                    break;
+                case 'image/jpeg':
+                default:
+                    $ext = "jpg";
+                    break;
+
+            }
+            $file = file_get_contents($pValue);
+            $path = sys_get_temp_dir() . '/spr_decl_' . md5($pValue) . '.' . $ext;
+            file_put_contents($path, $file);
+        }
+        return $path;
+    }
+
+    function __destruct()
+    {
+        // очистка файлового кеша
+        $files = glob(sys_get_temp_dir() . '/spr_decl_*.*');
+        array_map("unlink", $files);
     }
 }
