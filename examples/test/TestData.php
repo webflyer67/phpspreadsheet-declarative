@@ -7,7 +7,7 @@
  */
 
 
-namespace webflyer\PhpspreadsheetDeclarative\Test;
+namespace webflyer67\PhpspreadsheetDeclarative\Test;
 
 use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
@@ -140,7 +140,7 @@ class TestData
             'Description' => 'Test PhpspreadsheetDeclarative',
             'Keywords' => 'PhpspreadsheetDeclarative, php, Phpspreadsheet, spreadsheet',
             'Category' => 'test spreadsheet',
-            'Company' => 'webflyer',
+            'Company' => 'webflyer67',
         ];
     }
 

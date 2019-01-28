@@ -7,7 +7,7 @@
  */
 
 
-namespace webflyer\PhpspreadsheetDeclarative\Test;
+namespace webflyer67\PhpspreadsheetDeclarative\Test;
 
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;

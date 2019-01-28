@@ -7,7 +7,7 @@
  */
 
 
-namespace webflyer\PhpspreadsheetDeclarative\Test;
+namespace webflyer67\PhpspreadsheetDeclarative\Test;
 
 class TestTemplates
 {

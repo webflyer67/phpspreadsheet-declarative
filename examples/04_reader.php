@@ -4,7 +4,7 @@
  */
 require_once 'lib.php';
 
-use webflyer\PhpspreadsheetDeclarative\Reader;
+use webflyer67\PhpspreadsheetDeclarative\Reader;
 
 $template = [
     'xls_link' => '^WWW$',

@@ -1,6 +1,6 @@
 <?php
 
-namespace webflyer\PhpspreadsheetDeclarative;
+namespace webflyer67\PhpspreadsheetDeclarative;
 
 class Exception extends \Exception
 {

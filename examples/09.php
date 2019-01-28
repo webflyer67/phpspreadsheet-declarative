@@ -2,11 +2,11 @@
 
 require_once 'lib.php';
 
-use webflyer\PhpspreadsheetDeclarative\Test\TestData;
-use webflyer\PhpspreadsheetDeclarative\Test\TestTemplates;
-use webflyer\PhpspreadsheetDeclarative\Test\TestStyles;
+use webflyer67\PhpspreadsheetDeclarative\Test\TestData;
+use webflyer67\PhpspreadsheetDeclarative\Test\TestTemplates;
+use webflyer67\PhpspreadsheetDeclarative\Test\TestStyles;
 
-use webflyer\PhpspreadsheetDeclarative\Writer;
+use webflyer67\PhpspreadsheetDeclarative\Writer;
 
 
 $spreadsheet = Writer::getWriter()// создание экземпляра FastXlsPdfHelper (новый xls документ)

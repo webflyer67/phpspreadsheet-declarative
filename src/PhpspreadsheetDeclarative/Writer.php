@@ -8,7 +8,7 @@
  * Date: 16.11.2018
  */
 
-namespace webflyer\PhpspreadsheetDeclarative;
+namespace webflyer67\PhpspreadsheetDeclarative;
 
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
