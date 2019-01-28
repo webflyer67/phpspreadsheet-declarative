@@ -1,0 +1,27 @@
+{
+  "name": "webflyer-67/phpspreadsheet-declarative",
+  "description": "PHPSpreadsheet - declarative creation of xls/pdf with data binding",
+  "keywords": ["PHP", "OpenXML", "Excel", "xlsx", "xls", "ods", "gnumeric", "spreadsheet", "declarative", "bind", "binding"],
+  "homepage": "https://github.com/webflyer-67/phpspreadsheet-declarative",
+  "type": "library",
+  "license": "LGPL-2.1-or-later",
+
+  "require": {
+    "phpoffice/phpspreadsheet": "^1.6",
+    "tecnickcom/tcpdf": "^6.2",
+    "mpdf/mpdf": "^7.1",
+    "dompdf/dompdf": "^0.8.2"
+  },
+  "authors": [
+    {
+      "name": "Alexander Kudryavtsev",
+      "email": "kas16111980@yandex.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "webflyer-67\\PhpspreadsheetDeclarative\\": "src/PhpspreadsheetDeclarative",
+      "webflyer-67\\PhpspreadsheetDeclarative\\Test\\": "examples/test"
+    }
+  }
+}
