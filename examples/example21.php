@@ -25,21 +25,11 @@ $spreadsheet->getDocument()
     ->setCellValue('A1', 'Hello World !')
     ->setCellValue('B2', 'Hello World 2 !');
 $spreadsheet->addSheet(TestTemplates::getTemplate2(),TestData::getSetup());
-$fileName = 'hello world ' . date("m.d.y H_i_s");
+$fileName =  'example 21 ' . date("m.d.y H_i_s");
+$fileNameFull = $_SERVER['DOCUMENT_ROOT'] . '/runtime/' . $fileName;
+$spreadsheet->writeDocument($fileNameFull .  '.xlsx');
+$spreadsheet->writeDocument($fileNameFull. '_m.pdf');
 
-$spreadsheet->writeDocument($_SERVER['DOCUMENT_ROOT'] . '/runtime/' . $fileName . '.xlsx');
-$spreadsheet->writeDocument($_SERVER['DOCUMENT_ROOT'] . '/runtime/' . $fileName . '_m.pdf');
 
-
-//$spreadsheet->writeDocument($fileName . '.xls');
-//$spreadsheet->writeDocument($_SERVER['DOCUMENT_ROOT'] . '/runtime/' . $fileName . '.html');
-//$spreadsheet->writeDocument($_SERVER['DOCUMENT_ROOT'] . '/runtime/' . $fileName . '_tc.pdf','tc');
-//$spreadsheet->writeDocument($_SERVER['DOCUMENT_ROOT'] . '/runtime/' . $fileName . '_dom.pdf','dom');
-//$spreadsheet->sendDocument($fileName . '.pdf');
-
-toLog([
-    '01 !!!',
-
-]);
-
+toLog('Файлы сохранены в '. $fileNameFull . '.*');
 

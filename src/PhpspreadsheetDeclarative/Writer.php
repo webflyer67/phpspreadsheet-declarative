@@ -123,7 +123,7 @@ class  Writer
     }
 
     /**
-     * Добавляет лист к документу. В переданном шаблоне установленв связи со стилями и данными, по этому шаблону строится лист
+     * Добавляет лист к документу. В переданном шаблоне установлены связи со стилями и данными, по этому шаблону строится лист
      * @param array $template Шаблон генерируемого документа
      * @param array $setup Настройки листа: размер, ориентация
      * @return $this
@@ -160,8 +160,7 @@ class  Writer
     }
 
     /**
-     * Возвращает нативный объект для возможности вносить в него правки напрямую.
-     * Для Writer - это Spreadsheet, для PdfWriter - это HTML
+     * Возвращает объект Spreadsheet для возможности вносить в него правки напрямую
      *
      * @return Spreadsheet
      */
@@ -297,10 +296,12 @@ class  Writer
     {
         if (!$setup && !is_array($setup)) {
             $setup = [
-                'Orientation' => PageSetup::ORIENTATION_LANDSCAPE,
+                'Orientation' => PageSetup::ORIENTATION_PORTRAIT,
                 'PaperSize' => PageSetup::PAPERSIZE_A4,
             ];
         }
+        
+
         foreach ($setup as $prop => $val) {
             $method = 'set' . $prop;
             $this->document->getActiveSheet()->getPageSetup()
@@ -396,8 +397,8 @@ class  Writer
                 }
 
                 // Привязка ссылки, если есть
-                if (!empty($headRow['url'])) {
-                    $sheet->getCell($cells)->getHyperlink()->setUrl($headRow['url']);
+                if (!empty($headRow['href'])) {
+                    $sheet->getCell($cells)->getHyperlink()->setUrl($headRow['href']);
                 }
 
                 // Применение уникальных для каждой ячейки шапки стилей stylesTableHead
@@ -506,11 +507,11 @@ class  Writer
                                 $sheet->setCellValue($cell, $colTemplate['body']['defaultValue']);
                             }
                         }
-                        if (!empty($colTemplate['body']['bindColumnImage'])) {
-                            if (!empty($dataRow[$colTemplate['body']['bindColumnImage']])) {
+                        if (!empty($colTemplate['body']['bindImage'])) {
+                            if (!empty($dataRow[$colTemplate['body']['bindImage']])) {
 
                                 $drawing = new Drawing();
-                                $props = $dataRow[$colTemplate['body']['bindColumnImage']];
+                                $props = $dataRow[$colTemplate['body']['bindImage']];
                                 $hasDrawing = false;
                                 foreach ($props as $prop => $val) {
                                     $method = 'set' . $prop;
@@ -548,8 +549,8 @@ class  Writer
                             }
                         }
                         // Привязка ссылки, если есть
-                        if (!empty($colTemplate['body']['bindColumnUrl']) && !empty($dataRow[$colTemplate['body']['bindColumnUrl']])) {
-                            $sheet->getCell($cell)->getHyperlink()->setUrl($dataRow[$colTemplate['body']['bindColumnUrl']]);
+                        if (!empty($colTemplate['body']['bindHref']) && !empty($dataRow[$colTemplate['body']['bindHref']])) {
+                            $sheet->getCell($cell)->getHyperlink()->setUrl($dataRow[$colTemplate['body']['bindHref']]);
                         }
 
                         // Применение высоты строки

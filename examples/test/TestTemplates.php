@@ -18,7 +18,7 @@ class TestTemplates
     public static function getTemplate1()
     {
         return [
-            'sheetCaption' => 'Электропоезда Экспресс',
+            'sheetCaption' => 'Прайс 1',
             'tables' => [
                 self::getTable1(),
                 self::getTable2(),
@@ -32,7 +32,7 @@ class TestTemplates
     public static function getTemplate2()
     {
         return [
-            'sheetCaption' => 'Электропоезда',
+            'sheetCaption' => 'Прайс 2',
             'tables' => [
                 self::getTable2(),
                 self::getTable1(),
@@ -78,7 +78,7 @@ class TestTemplates
                         ['caption' => 'Тип', 'mergeId' => 'Тип'],
                         ['mergeId' => 'Тип'],
                     ],
-                    'body' => ['bindColumn' => 'type', 'width' => 15, 'bindColumnUrl' => 'url', 'styles' => ['mainLink']],
+                    'body' => ['bindColumn' => 'type', 'width' => 15, 'bindHref' => 'href', 'styles' => ['mainLink']],
                 ],
                 [
                     'head' => [
@@ -104,13 +104,13 @@ class TestTemplates
                 [
                     'head' => [
                         ['mergeId' => 'Цены'],
-                        ['caption' => 'Цена клиенту', 'url' => 'http://localhost'],
+                        ['caption' => 'Цена клиенту', 'href' => 'http://localhost'],
                     ],
                     'body' => ['bindColumn' => 'price', 'width' => 20, 'filters' => 'thousands', 'defaultValue' => 'по запросу'],
                 ],
                 [
                     'head' => [
-                        ['mergeId' => 'Цены', 'url' => 'http://localhost'],
+                        ['mergeId' => 'Цены', 'href' => 'http://localhost'],
                         ['caption' => 'Цена итого',],
                     ],
                     'body' => ['bindColumn' => 'total_price', 'width' => 20, 'filters' => 'thousands', 'defaultValue' => 'по запросу', 'bindStyles' => 'styles'],
@@ -127,15 +127,15 @@ class TestTemplates
             'bindTable' => 'images',
             'columns' => [
                 [
-                    'body' => ['bindColumnImage' => 'img1', 'bindHeight' => 'height'],
+                    'body' => ['bindImage' => 'img1', 'bindHeight' => 'height'],
                 ],
                 [], [],
                 [
-                    'body' => ['bindColumnImage' => 'img2',],
+                    'body' => ['bindImage' => 'img2',],
                 ],
                 [],
                 [
-                    'body' => ['bindColumnImage' => 'img3',],
+                    'body' => ['bindImage' => 'img3',],
                 ]
 
             ]

@@ -24,7 +24,7 @@ class TestData
             $data[$i] = [
                 'number' => $i,
                 'format' => '60x90',
-                'url' => 'http://localhost',
+                'href' => 'http://localhost',
                 'count' => rand(1, 10),
                 'type' => 'стикер  ',
             ];
@@ -133,8 +133,8 @@ class TestData
     public static function getMeta()
     {
         return [
-            'Creator' => 'Alexander Kudryavtsev',
-            'LastModifiedBy' => 'Alexander Kudryavtsev',
+            'Creator' => 'Vasilii Pupkin',
+            'LastModifiedBy' => 'Vasilii Pupkin',
             'Title' => 'Test PhpspreadsheetDeclarative',
             'Subject' => 'Test PhpspreadsheetDeclarative',
             'Description' => 'Test PhpspreadsheetDeclarative',

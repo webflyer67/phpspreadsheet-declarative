@@ -32,7 +32,7 @@ class TestStyles
             ],
             'mainHead' => [
                 'font' => ['bold' => true, 'color' => ['rgb' => 'ffffff'], 'size' => 10, 'name' => 'Arial'],
-                'fill' => ['fillType' => Fill::FILL_SOLID, 'color' => ['rgb' => '538dd5']],
+                'fill' => ['fillType' => Fill::FILL_SOLID, 'color' => ['rgb' => '2980B9']],
                 'alignment' => ['horizontal' => 'center', 'vertical' => 'center', 'wrap' => true, 'shrinkToFit' => true],
             ],
             'mainBody' => [
